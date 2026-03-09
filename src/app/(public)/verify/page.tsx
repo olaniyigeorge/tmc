@@ -1,4 +1,4 @@
-import React from "react";
+
 import VerifyForm from "@/components/public/VerifyForm";
 
 const VerifyPage = () => {

@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 import CheckForm from "@/components/public/CheckForm";
 
 const CheckPage = () => {
