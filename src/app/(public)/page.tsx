@@ -1,22 +1,39 @@
-import React from "react";
-import SchoolSelect from "@/components/public/SchoolSelect";
-import Link from "next/link";
+// src/app/(public)/page.tsx
+// ─────────────────────────────────────────────────────────────
+// Pure SERVER component — no "use client" needed here.
+// All interactivity is isolated inside child client components.
+// ─────────────────────────────────────────────────────────────
 
-const LandingPage = () => {
-  return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold mb-4">Welcome to Results Portal</h1>
-      <SchoolSelect onSelect={(s) => {
-        // navigate to check with school preselected
-        window.location.href = `/check?schoolId=${s._id}`;
-      }} />
-      <div className="mt-6">
-        <Link href="/verify">
-          <a className="text-blue-600 underline">Verify Result</a>
-        </Link>
-      </div>
-    </div>
-  );
+import HeroSection from "@/components/sections/HeroSection";
+
+import SchoolsSection from "@/components/sections/SchoolsSection";
+import HowItWorksSection from "@/components/sections/HowItWorks";
+import VerifyStrip from "@/components/sections/VerifyStrip";
+import SiteFooter from "@/components/sections/SiteFooter";
+
+export const metadata = {
+  title: "Results Portal — Tinabel & Tinuola Schools",
+  description:
+    "Access and verify term report sheets for Tinabel Model College and Tinuola Children School.",
 };
 
-export default LandingPage;
+export default function HomePage() {
+  return (
+    <>
+      {/* ── 1. HERO (nav + headline + CTA cards) ── */}
+      <HeroSection />
+
+      {/* ── 2. SCHOOL PICKER CARDS (dark section) ── */}
+      <SchoolsSection />
+
+      {/* ── 3. HOW IT WORKS (3 steps) ── */}
+      <HowItWorksSection />
+
+      {/* ── 4. QUICK VERIFY INPUT (client island) ── */}
+      <VerifyStrip />
+
+      {/* ── 5. FOOTER ── */}
+      <SiteFooter />
+    </>
+  );
+}
