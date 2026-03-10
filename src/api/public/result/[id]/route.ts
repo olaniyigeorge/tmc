@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectToDatabase } from "../../../lib/db";
-import Result from "../../../models/Result";
-import { verifyResultAccess } from "../../../lib/jwt";
+import { connectToDatabase } from "../../../../lib/db";
+import Result from "../../../../models/Result";
+import { verifyResultAccess } from "../../../../lib/jwt";
 
 export async function GET(
   req: NextRequest,
@@ -17,14 +17,14 @@ export async function GET(
       return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
     }
     await connectToDatabase();
-    const result = await Result.findById(params.id).lean();
+    const result = await Result.findById(params.id).lean() as any;
     if (!result) {
       return NextResponse.json({ ok: false, error: "Not found" }, { status: 404 });
     }
-    const Student = (await import("../../../models/Student")).default;
-    const School = (await import("../../../models/School")).default;
-    const student = await Student.findById(result.studentId).lean();
-    const school = await School.findById(result.schoolId).lean();
+    const Student = (await import("../../../../models/Student")).default;
+    const School = (await import("../../../../models/School")).default;
+    const student = await Student.findById(result.studentId).lean() as any;
+    const school = await School.findById(result.schoolId).lean() as any;
     return NextResponse.json({
       ok: true,
       data: {
