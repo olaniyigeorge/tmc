@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { resultTemplates } from "../../config/resultTemplates";
-import Input from "../ui/Input";
-import Button from "../ui/Button";
+import { resultTemplates } from "config/resultTemplates";
+import Input from "ui/Input";
+import Button from "ui/Button";
 
 interface Props {
   initial?: any;

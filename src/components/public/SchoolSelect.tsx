@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { School } from "@/types";
-import Card from "../ui/Card";
+import Card from "ui/Card";
 // import { useRouter } from "next/navigation";
 
 interface Props {

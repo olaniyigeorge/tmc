@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectToDatabase } from "@/../lib/db";
-import Result from "@/../models/Result";
-import { verifyResultAccess } from "@/../lib/jwt";
+import { connectToDatabase } from "@/lib/db";
+import Result from "@/models/Result";
+import { verifyResultAccess } from "@/lib/jwt";
 
 export async function GET(
   req: NextRequest,
@@ -21,8 +21,8 @@ export async function GET(
     if (!result) {
       return NextResponse.json({ ok: false, error: "Not found" }, { status: 404 });
     }
-    const Student = (await import("@/../models/Student")).default;
-    const School = (await import("@/../models/School")).default;
+    const Student = (await import("@/models/Student")).default;
+    const School = (await import("@/models/School")).default;
     const student = await Student.findById(result.studentId).lean() as any;
     const school = await School.findById(result.schoolId).lean() as any;
     return NextResponse.json({

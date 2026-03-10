@@ -1,7 +1,7 @@
-import { resultTemplates } from "../config/resultTemplates";
-import { calculateGrade } from "../lib/grading";
-import { getPreviousTerm } from "../lib/term";
-import Result from "../models/Result";
+import { resultTemplates } from "config/resultTemplates";
+import { calculateGrade } from "lib/grading";
+import { getPreviousTerm } from "lib/term";
+import Result from "models/Result";
 
 
 export type SubjectInput = {
