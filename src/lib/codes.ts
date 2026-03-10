@@ -30,7 +30,7 @@ export async function generateVerificationCode(
   // try loop
   do {
     code = `${prefix}-${nanoid(5).toUpperCase()}`;
-    exists = await Result.exists({ verificationCode: code });
+    exists = !!(await Result.exists({ verificationCode: code }));
   } while (exists);
   return code;
 }
