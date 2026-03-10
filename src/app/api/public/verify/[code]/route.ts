@@ -5,10 +5,12 @@ import { verifySchema } from "@/validation/public";
 
 const verifyAttempts: Record<string, {count:number, time:number}> = {};
 
+interface Ctx { params: Promise<{ code: string }> }
+
+
 export async function GET(
   req: NextRequest,
-  { params }: { params: { code: string } }
-) {
+  { params }: Ctx) {
   try {
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim()
         ?? req.headers.get("x-real-ip")
@@ -24,7 +26,7 @@ export async function GET(
     }
     entry.count += 1;
     verifyAttempts[key] = entry;
-    const parsed = verifySchema.parse({ code: params.code });
+    const parsed = verifySchema.parse({ code: (await params).code });
     await connectToDatabase();
     const result = await Result.findOne({ verificationCode: parsed.code }).lean() as any;
     if (!result) {
