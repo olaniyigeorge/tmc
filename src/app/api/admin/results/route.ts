@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectToDatabase } from "../../../../lib/db";
-import Result from "../../../../models/Result";
-import Student from "../../../../models/Student";
-import { getSessionUser, ensureSchoolAccess } from "../../../../lib/auth";
+import { connectToDatabase } from "@/lib/db";
+import Result from "@/models/Result";
+import Student from "@/models/Student";
+import { getSessionUser, ensureSchoolAccess } from "@/lib/auth";
 
 // ── lean types ───
 type ResultLean = {
@@ -55,8 +55,8 @@ export async function GET(req: NextRequest) {
     const results = await Result.find(query).lean<ResultLean[]>();
 
     // attach student + school names
-    const StudentModel = (await import("../../../../models/Student")).default;
-    const SchoolModel  = (await import("../../../../models/School")).default;
+    const StudentModel = (await import("@/models/Student")).default;
+    const SchoolModel  = (await import("@/models/School")).default;
 
     const studentIds = results.map((r) => r.studentId);
     const schoolIds  = results.map((r) => r.schoolId);
@@ -107,11 +107,11 @@ export async function POST(req: NextRequest) {
     const exists = await Result.findOne({ schoolId: student.schoolId, studentId, session, term });
     if (exists) return NextResponse.json({ ok: true, data: exists });
 
-    const SchoolModel = (await import("../../../../models/School")).default;
+    const SchoolModel = (await import("@/models/School")).default;
     const school = await SchoolModel.findById(student.schoolId);
     const templateKey = school?.type === "SECONDARY" ? "TINABEL_SECONDARY" : "TINUOLA_PRIMARY";
 
-    const ClassModel = (await import("../../../../models/Class")).default;
+    const ClassModel = (await import("@/models/Class")).default;
     const cls = await ClassModel.findById(student.classId);
 
     const newResult = new Result({

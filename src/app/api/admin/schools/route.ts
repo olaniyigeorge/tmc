@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectToDatabase } from "../../../../lib/db";
-import School from "../../../../models/School";
-import { getSessionUser } from "../../../../lib/auth";
+import { connectToDatabase } from "@/lib/db";
+import School from "@/models/School";
+import { getSessionUser } from "@/lib/auth";
 
 export async function GET(req: NextRequest) {
   console.log("Req info", req)

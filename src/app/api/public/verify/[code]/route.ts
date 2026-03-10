@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectToDatabase } from "../../../../../lib/db";
-import Result from "../../../../../models/Result";
-import { verifySchema } from "../../../../../validation/public";
+import { connectToDatabase } from "@/../lib/db";
+import Result from "@/../models/Result";
+import { verifySchema } from "@/../validation/public";
 
 const verifyAttempts: Record<string, {count:number, time:number}> = {};
 
@@ -31,8 +31,8 @@ export async function GET(
       return NextResponse.json({ ok: true, data: { valid: false } });
     }
     // basic info
-    const Student = (await import("../../../../../models/Student")).default;
-    const School = (await import("../../../../../models/School")).default;
+    const Student = (await import("@/../models/Student")).default;
+    const School = (await import("@/../models/School")).default;
     const student = await Student.findById(result.studentId).lean() as any;
     const school = await School.findById(result.schoolId).lean() as any;
     return NextResponse.json({

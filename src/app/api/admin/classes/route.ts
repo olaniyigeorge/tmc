@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectToDatabase } from "../../../../lib/db";
-import ClassModel from "../../../../models/Class";
-import { getSessionUser, ensureSchoolAccess } from "../../../../lib/auth";
-import { classSchema } from "../../../../validation/admin";
+import { connectToDatabase } from "@/lib/db";
+import ClassModel from "@/models/Class";
+import { getSessionUser, ensureSchoolAccess } from "@/lib/auth";
+import { classSchema } from "@/validation/admin";
 
 export async function GET(req: NextRequest) {
   try {

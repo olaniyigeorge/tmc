@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectToDatabase } from "../../../../lib/db";
-import Student from "../../../../models/Student";
-import Result from "../../../../models/Result";
+import { connectToDatabase } from "@/lib/db";
+import Student from "@/models/Student";
+import Result from "@/models/Result";
 import bcrypt from "bcrypt";
-import { signResultAccess } from "../../../../lib/jwt";
-import { checkSchema } from "../../../../validation/public";
+import { signResultAccess } from "@/lib/jwt";
+import { checkSchema } from "@/validation/public";
 
 const attempts: Record<string, {count:number, time:number}> = {};
 

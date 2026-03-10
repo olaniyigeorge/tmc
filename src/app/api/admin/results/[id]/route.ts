@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectToDatabase } from "../../../../../lib/db";
-import Result from "../../../../../models/Result";
-import { getSessionUser, ensureSchoolAccess } from "../../../../../lib/auth";
-import { validateAndNormalizeResultInput } from "../../../../../validation/results";
+import { connectToDatabase } from "@/lib/db";
+import Result from "@/models/Result";
+import { getSessionUser, ensureSchoolAccess } from "@/lib/auth";
+import { validateAndNormalizeResultInput } from "@/validation/results";
 
 type ResultLean = {
   _id: unknown;
