@@ -5,7 +5,7 @@ import { getSessionUser } from "../../../lib/auth";
 
 export async function GET(req: NextRequest) {
   try {
-    const user = await getSessionUser(req);
+    const user = await getSessionUser();
     await connectToDatabase();
     if (!user) return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
     let schools;
@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const user = await getSessionUser(req);
+    const user = await getSessionUser();
     if (!user || user.role !== "SUPER_ADMIN") {
       return NextResponse.json({ ok: false, error: "Forbidden" }, { status: 403 });
     }
