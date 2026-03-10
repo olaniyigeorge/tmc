@@ -3,7 +3,6 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { connectToDatabase } from "@/lib/db";
 import Result  from "@/models/Result";
-import Student from "@/models/Student";
 import Class   from "@/models/Class";
 import School  from "@/models/School";
 import Link from "next/link";

@@ -14,7 +14,7 @@ interface Props {
 const ResultFormPrimary: React.FC<Props> = ({ initial, onSave, onPublish, readonly }) => {
   const [subjects, setSubjects] = useState<any[]>(initial?.subjects || []);
   const [ratings, setRatings] = useState<any>(initial?.ratings || { scale: "ONE_FIVE", items: {} });
-
+  console.warn("Not using", setRatings)
   React.useEffect(() => {
     if ((!initial || !initial.subjects || initial.subjects.length === 0) && !subjects.length) {
       const t = resultTemplates["TINUOLA_PRIMARY"];

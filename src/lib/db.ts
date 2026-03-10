@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-let cached: { conn: typeof mongoose | null; promise: Promise<typeof mongoose> | null } = {
+const cached: { conn: typeof mongoose | null; promise: Promise<typeof mongoose> | null } = {
   conn: null,
   promise: null,
 };

@@ -48,7 +48,7 @@ export default function StudentForm({ initialData, mode = "create" }: Props) {
     register,
     handleSubmit,
     watch,
-    setValue,
+    // setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(studentSchema),
@@ -73,7 +73,7 @@ export default function StudentForm({ initialData, mode = "create" }: Props) {
 
   const watchSchoolId = watch("schoolId");
 
-  /* ── Fetch schools ─────────────────────────────────────────── */
+  /* ── Fetch schools ── */
   useEffect(() => {
     fetch("/api/admin/schools")
       .then((r) => r.json())
@@ -81,7 +81,7 @@ export default function StudentForm({ initialData, mode = "create" }: Props) {
       .finally(() => setLoadingSchools(false));
   }, []);
 
-  /* ── Fetch classes when school changes ─────────────────────── */
+  /* ── Fetch classes when school changes ── */
   useEffect(() => {
     if (!watchSchoolId) { setClasses([]); return; }
     setLoadingClasses(true);

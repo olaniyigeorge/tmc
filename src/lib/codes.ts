@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import { nanoid } from "nanoid";
 import { connectToDatabase } from "./db";
-import School from "../models/School";
 import Result from "../models/Result";
 
 export function generatePin(): string {
@@ -20,7 +19,7 @@ export async function generateVerificationCode(
   term: string,
   className: string
 ): Promise<string> {
-  const db = await connectToDatabase();
+  await connectToDatabase();
   // build prefix
   const prefix = `${schoolAbbrev}-${session.replace("/", "")}-${
     term.toUpperCase().replace("ST", "").replace("ND", "").replace("RD", "")

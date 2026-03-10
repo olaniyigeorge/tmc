@@ -11,13 +11,18 @@ interface School {
 
 export default function SchoolSwitcher() {
   const [schools, setSchools] = useState<School[]>([]);
-  const [current, setCurrent] = useState<string>("");
+  // const [current, setCurrent] = useState<string>("");
   const router = useRouter();
+
+  const [current, setCurrent] = useState<string>(() => {
+    if (typeof window === "undefined") return ""; // SSR guard
+    return localStorage.getItem("adminSchool") ?? "";
+  });
 
   useEffect(() => {
     // Restore previously selected school
-    const saved = localStorage.getItem("adminSchool") ?? "";
-    setCurrent(saved);
+    // const saved = localStorage.getItem("adminSchool") ?? "";
+    // setCurrent(saved);
 
     fetch("/api/admin/schools")
       .then((r) => r.json())

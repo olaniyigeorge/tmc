@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
     const url = new URL(req.url);
     const schoolId = url.searchParams.get("schoolId");
     const classId = url.searchParams.get("classId");
-    let query: any = {};
+    const query: any = {};
     if (schoolId) {
       ensureSchoolAccess(user, schoolId);
       query.schoolId = schoolId;

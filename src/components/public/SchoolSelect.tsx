@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { School } from "@/types";
 import Card from "../ui/Card";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 interface Props {
   onSelect?: (school: School) => void;
@@ -10,7 +10,7 @@ interface Props {
 
 const SchoolSelect: React.FC<Props> = ({ onSelect }) => {
   const [schools, setSchools] = useState<School[]>([]);
-  const router = useRouter();
+  // const router = useRouter();
   useEffect(() => {
     fetch("/api/admin/schools")
       .then((res) => res.json())

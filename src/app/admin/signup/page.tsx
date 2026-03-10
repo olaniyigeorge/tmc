@@ -179,7 +179,7 @@ export default function AdminSignupPage() {
             <div className="signup-success-icon">🎉</div>
             <h1 className="login-title" style={{ marginBottom: 12 }}>Account created!</h1>
             <p className="login-subtitle">
-              Welcome, <strong>{name}</strong>. You're being signed in and redirected to your dashboard…
+              Welcome, <strong>{name}</strong>. You&apos;re being signed in and redirected to your dashboard…
             </p>
             <div style={{ marginTop: 24 }}>
               <span className="spinner" style={{ borderTopColor: "var(--pink)", borderColor: "rgba(233,30,140,0.2)", width: 28, height: 28, borderWidth: 3 }} />

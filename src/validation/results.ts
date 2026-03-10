@@ -1,9 +1,8 @@
-import { z } from "zod";
 import { resultTemplates } from "../config/resultTemplates";
 import { calculateGrade } from "../lib/grading";
 import { getPreviousTerm } from "../lib/term";
 import Result from "../models/Result";
-import { connectToDatabase } from "../lib/db";
+
 
 export type SubjectInput = {
   name: string;

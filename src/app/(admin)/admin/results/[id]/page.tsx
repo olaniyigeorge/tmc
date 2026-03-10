@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter, useParams } from "next/navigation";
+import {useParams } from "next/navigation"; // useRouter
 import ResultFormSecondary from "@/components/admin/ResultFormSecondary";
 import ResultFormPrimary from "@/components/admin/ResultFormPrimary";
 
@@ -9,7 +9,9 @@ const EditResultPage: React.FC = () => {
   const id = params.id;
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
+  // const router = useRouter();
+
+
 
   useEffect(() => {
     if (id) {

@@ -10,6 +10,7 @@ export function verifyResultAccess(token: string) {
   try {
     return jwt.verify(token, SECRET) as { resultId: string };
   } catch (e) {
+    console.error(`Error verifying result access: ${e}`)
     return null;
   }
 }

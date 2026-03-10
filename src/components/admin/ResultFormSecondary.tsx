@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { resultTemplates } from "../../config/resultTemplates";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
@@ -14,7 +14,8 @@ interface Props {
 const ResultFormSecondary: React.FC<Props> = ({ initial, onSave, onPublish, readonly }) => {
   const [subjects, setSubjects] = useState<any[]>(initial?.subjects || []);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    if (subjects.length > 0) return;
     if ((!initial || !initial.subjects || initial.subjects.length === 0) && !subjects.length) {
       // prefill based on template default subjects
       const t = resultTemplates["TINABEL_SECONDARY"];

@@ -24,6 +24,8 @@ export default function AdminShell({ children, session }: Props) {
   const schoolId  = (session.user as any)?.schoolId as string | null;
   const name      = session.user?.name ?? session.user?.email ?? "Admin";
 
+  console.log("User has is on school ", schoolId)
+
   async function handleSignOut() {
     await signOut({ redirect: false });
     router.push("/admin/login");
