@@ -2,11 +2,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { verifySchema } from "validation/public";
-import Input from "ui/Input";
-import Button from "ui/Button";
+import Input from "../ui/Input";
+import Button from "../ui/Button";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
+import { verifySchema } from "@/validation/public";
 
 type FormData = z.infer<typeof verifySchema>;
 

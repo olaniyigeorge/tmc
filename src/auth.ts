@@ -68,7 +68,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     // Persist extra fields into the JWT token
     async jwt({ token, user }) {
       if (user) {
-        token.id       = user.id;
+        token.id       = user.id ?? "";
         token.role     = (user as any).role;
         token.schoolId = (user as any).schoolId ?? null;
       }

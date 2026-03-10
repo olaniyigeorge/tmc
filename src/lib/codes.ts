@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { nanoid } from "nanoid";
 import { connectToDatabase } from "./db";
-import Result from "models/Result";
+import Result from "@/models/Result";
 
 export function generatePin(): string {
   return Math.floor(100000 + Math.random() * 900000).toString();

@@ -2,15 +2,16 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { checkSchema } from "validation/public";
-import Input from "ui/Input";
-import Select from "ui/Select";
-import Button from "ui/Button";
+import { checkSchema } from "@/validation/public";
+
+import Select from "../ui/Select";
+import Button from "../ui/Button";
 import { useRouter } from "next/navigation";
 
 type FormData = z.infer<typeof checkSchema>;
 
 import { z } from "zod";
+import Input from "../ui/Input";
 
 const CheckForm: React.FC = () => {
   const router = useRouter();
