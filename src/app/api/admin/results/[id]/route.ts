@@ -15,15 +15,17 @@ type ResultLean = {
   status: string;
 };
 
+interface Ctx { params: Promise<{ id: string }> }
+
+
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params }: Ctx) {
   try {
     const user = await getSessionUser();
     if (!user) return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
     await connectToDatabase();
-    const result = await Result.findById(params.id).lean<ResultLean>();
+    const result = await Result.findById((await params).id).lean<ResultLean>();
     if (!result) return NextResponse.json({ ok: false, error: "Not found" }, { status: 404 });
     ensureSchoolAccess(user, result.schoolId.toString());
     return NextResponse.json({ ok: true, data: result });
@@ -34,7 +36,7 @@ export async function GET(
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: Ctx
 ) {
   try {
     const user = await getSessionUser();
@@ -43,7 +45,7 @@ export async function PATCH(
     }
     const body = await req.json();
     await connectToDatabase();
-    const result = await Result.findById(params.id);
+    const result = await Result.findById((await params).id);
     if (!result) {
       return NextResponse.json({ ok: false, error: "Not found" }, { status: 404 });
     }
