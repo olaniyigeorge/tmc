@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectToDatabase } from "../../../lib/db";
-import Result from "../../../models/Result";
-import { verifySchema } from "../../../validation/public";
+import { connectToDatabase } from "../../../../lib/db";
+import Result from "../../../../models/Result";
+import { verifySchema } from "../../../../validation/public";
 
 const verifyAttempts: Record<string, {count:number, time:number}> = {};
 
@@ -10,7 +10,9 @@ export async function GET(
   { params }: { params: { code: string } }
 ) {
   try {
-    const ip = req.ip || req.headers.get("x-forwarded-for") || "";
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim()
+        ?? req.headers.get("x-real-ip")
+        ?? "global";
     const key = ip || "global";
     const now = Date.now();
     const entry = verifyAttempts[key] || { count: 0, time: now };
@@ -24,15 +26,15 @@ export async function GET(
     verifyAttempts[key] = entry;
     const parsed = verifySchema.parse({ code: params.code });
     await connectToDatabase();
-    const result = await Result.findOne({ verificationCode: parsed.code }).lean();
+    const result = await Result.findOne({ verificationCode: parsed.code }).lean() as any;
     if (!result) {
       return NextResponse.json({ ok: true, data: { valid: false } });
     }
     // basic info
-    const Student = (await import("../../../models/Student")).default;
-    const School = (await import("../../../models/School")).default;
-    const student = await Student.findById(result.studentId).lean();
-    const school = await School.findById(result.schoolId).lean();
+    const Student = (await import("../../../../models/Student")).default;
+    const School = (await import("../../../../models/School")).default;
+    const student = await Student.findById(result.studentId).lean() as any;
+    const school = await School.findById(result.schoolId).lean() as any;
     return NextResponse.json({
       ok: true,
       data: {
