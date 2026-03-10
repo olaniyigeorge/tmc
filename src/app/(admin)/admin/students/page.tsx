@@ -33,7 +33,12 @@ const StudentsPage: React.FC = () => {
     <div>
       <h1 className="text-2xl font-bold mb-4">Students</h1>
       <div className="mb-4">
-        <Link href="/admin/students/new"><a className="px-3 py-1 bg-green-600 text-white rounded">New Student</a></Link>
+        <Link 
+        href="/admin/students/new"
+         className="px-3 py-1 bg-green-600 text-white rounded"
+         >
+          New Student
+        </Link>
       </div>
       <div className="mb-4 flex gap-2">
         {schools.length > 1 && (
