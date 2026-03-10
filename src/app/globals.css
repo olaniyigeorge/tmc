@@ -365,6 +365,65 @@ footer p { font-size: 13px; color: rgba(255,255,255,0.35); }
 .quick-icon  { font-size: 26px; display: block; margin-bottom: 9px; }
 .quick-label { font-size: 13px; font-weight: 600; color: var(--dark); }
 
+
+/* ============================================================
+   ADMIN — SIGNUP PAGE EXTRAS
+   ============================================================ */
+.signup-step-badge {
+  display: inline-block; padding: 3px 12px; border-radius: 50px; margin-bottom: 12px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+  background: var(--pink-pale); color: var(--pink);
+}
+.signup-steps-indicator { display: flex; align-items: center; justify-content: center; gap: 0; margin-top: 32px; }
+.ssi-dot {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+  background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.40);
+  transition: all 0.3s; flex-shrink: 0;
+}
+.ssi-dot.active { background: var(--pink); color: white; box-shadow: 0 0 0 4px rgba(233,30,140,0.25); }
+.ssi-dot.done   { background: #22c55e; color: white; }
+.ssi-line { flex: 1; height: 2px; background: rgba(255,255,255,0.12); max-width: 40px; }
+.signup-steps-labels { display: flex; justify-content: space-between; padding: 0 4px; margin-top: 8px; font-size: 11px; color: rgba(255,255,255,0.40); }
+
+.signup-schools-loading { font-size: 13px; color: var(--muted); padding: 8px 0; }
+.signup-school-cards { display: flex; flex-direction: column; gap: 8px; }
+.signup-school-card {
+  display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+  border-radius: var(--radius); border: 1.5px solid var(--border); background: var(--white);
+  cursor: pointer; text-align: left; width: 100%; font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.signup-school-card:hover { border-color: var(--muted); }
+.signup-school-card.selected.pink { border-color: var(--pink); background: var(--pink-pale); box-shadow: 0 0 0 3px rgba(233,30,140,0.10); }
+.signup-school-card.selected.blue { border-color: var(--blue); background: var(--blue-pale); box-shadow: 0 0 0 3px rgba(26,86,219,0.10); }
+.signup-school-name  { font-size: 14px; font-weight: 600; color: var(--dark); flex: 1; }
+.signup-school-type  { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.signup-school-check { font-size: 14px; color: var(--green); font-weight: 700; }
+
+.signup-role-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.signup-role-card {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+  padding: 14px 12px; border-radius: var(--radius); border: 1.5px solid var(--border);
+  background: var(--white); cursor: pointer; text-align: left; font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.signup-role-card:hover { border-color: var(--muted); }
+.signup-role-card.selected { border-color: var(--blue); background: var(--blue-pale); box-shadow: 0 0 0 3px rgba(26,86,219,0.10); }
+.signup-role-icon  { font-size: 20px; }
+.signup-role-label { font-size: 13px; font-weight: 600; color: var(--dark); }
+.signup-role-desc  { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+.signup-strength       { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.signup-strength-bar   { display: flex; gap: 3px; flex: 1; }
+.signup-strength-seg   { height: 4px; flex: 1; border-radius: 2px; transition: background 0.2s; }
+.signup-strength-label { font-size: 11px; font-weight: 600; min-width: 40px; }
+.signup-hint         { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+.signup-match        { font-size: 12px; font-weight: 600; margin-top: 4px; display: block; }
+.signup-terms        { font-size: 12px; color: var(--muted); text-align: center; line-height: 1.6; margin-top: 4px; }
+.signup-success-icon { font-size: 56px; margin-bottom: 16px; display: block; }
+
 /* ============================================================
    ANIMATIONS
    ============================================================ */
@@ -397,28 +456,146 @@ footer p { font-size: 13px; color: rgba(255,255,255,0.35); }
   .admin-sidebar { width: 100%; height: auto; position: static; }
 }
 
-
-
-@media (max-width: 700px) {
-  nav                              { padding: 18px 20px; }
-  .nav-links .nav-link:not(.admin) { display: none; }
-  .schools-grid                    { grid-template-columns: 1fr; }
-  .steps-grid                      { grid-template-columns: 1fr; }
-  footer                           { flex-direction: column; align-items: flex-start; }
+/* ============================================================
+   STUDENT FORM  (sf-*)
+   ============================================================ */
+.sf-breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--muted); margin-bottom: 20px;
 }
-@media (max-width: 640px) {
-  .stat-cards    { grid-template-columns: 1fr 1fr; }
-  .quick-actions { grid-template-columns: 1fr 1fr; }
-  .admin-shell   { flex-direction: column; }
-  .admin-sidebar { width: 100%; height: auto; position: static; }
+.sf-breadcrumb-link { color: var(--blue); text-decoration: none; }
+.sf-breadcrumb-link:hover { text-decoration: underline; }
+.sf-breadcrumb-sep { color: var(--border); }
+
+.sf-page-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px; margin-bottom: 28px;
+}
+.sf-page-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--dark); }
+.sf-page-sub   { font-size: 13px; color: var(--mid); margin-top: 4px; }
+
+.student-form { display: flex; flex-direction: column; gap: 0; }
+
+.sf-section {
+  background: white; border: 1.5px solid var(--border);
+  border-radius: 16px; padding: 24px 24px 20px;
+  margin-bottom: 16px;
+}
+.sf-section-title {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 700; color: var(--dark);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: 18px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.sf-section-icon { font-size: 16px; }
+
+.sf-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.sf-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+.sf-required { color: var(--pink); margin-left: 2px; }
+.sf-optional  { font-size: 10px; font-weight: 400; color: var(--muted); margin-left: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+.sf-hint-inline { font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 8px; }
+
+.sf-select-wrap { position: relative; }
+.sf-select { padding-right: 32px !important; cursor: pointer; }
+.sf-select-arrow { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 11px; color: var(--muted); pointer-events: none; }
+
+.sf-locked-field {
+  display: flex; align-items: center; gap: 8px;
+  padding: 11px 14px; border: 1.5px solid var(--border);
+  border-radius: var(--radius); background: var(--light);
+  font-size: 14px; color: var(--mid);
+}
+.sf-lock-icon { font-size: 13px; }
+
+.sf-radio-group { display: flex; gap: 16px; padding: 10px 0; }
+.sf-radio-label {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 14px; color: var(--dark); cursor: pointer;
+}
+.sf-radio-label input[type="radio"] { accent-color: var(--pink); width: 16px; height: 16px; cursor: pointer; }
+
+.sf-error   { font-size: 12px; color: #dc2626; margin-top: 4px; display: block; }
+.sf-success {
+  display: flex; align-items: center; gap: 8px; padding: 12px 16px;
+  background: var(--green-pale); border: 1px solid #bbf7d0;
+  border-radius: var(--radius); font-size: 13px; color: var(--green);
 }
 
+.sf-actions {
+  display: flex; align-items: center; justify-content: flex-end;
+  gap: 12px; margin-top: 8px; padding-top: 8px;
+}
 
+.sf-not-found {
+  text-align: center; padding: 80px 24px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--mid);
+}
 
+/* ============================================================
+   STUDENTS TABLE  (st-*)
+   ============================================================ */
+.st-filters {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.st-filter-item { min-width: 160px; }
+.st-search { flex: 1; }
 
+.st-empty {
+  text-align: center; padding: 80px 24px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--mid); background: white; border-radius: 16px;
+  border: 1.5px dashed var(--border);
+}
 
+.st-table-wrap {
+  background: white; border-radius: 16px;
+  border: 1.5px solid var(--border); overflow: hidden;
+}
+.st-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.st-table thead { background: var(--light); }
+.st-table th {
+  padding: 12px 16px; text-align: left;
+  font-size: 11px; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  border-bottom: 1.5px solid var(--border);
+}
+.st-table td {
+  padding: 12px 16px; border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.st-table tbody tr:last-child td { border-bottom: none; }
+.st-table tbody tr:hover { background: var(--light); }
 
+.st-name-cell { display: flex; align-items: center; gap: 10px; }
+.st-avatar {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--pink-pale), var(--blue-pale));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: var(--mid);
+  text-transform: uppercase;
+}
+.st-full-name  { font-weight: 600; color: var(--dark); }
+.st-other-name { font-size: 11px; color: var(--muted); }
+.st-code { font-size: 12px; background: var(--light); padding: 2px 8px; border-radius: 6px; font-family: monospace; color: var(--mid); }
+.st-class-badge { font-size: 12px; font-weight: 600; background: var(--blue-pale); color: var(--blue); padding: 3px 10px; border-radius: 50px; }
+.st-muted { color: var(--mid); font-size: 13px; }
+.st-edit-btn {
+  font-size: 13px; font-weight: 600; color: var(--blue);
+  text-decoration: none; white-space: nowrap;
+  padding: 5px 12px; border-radius: 8px;
+  transition: background 0.15s;
+}
+.st-edit-btn:hover { background: var(--blue-pale); }
 
-
-
-
+@media (max-width: 768px) {
+  .sf-grid-2 { grid-template-columns: 1fr; }
+  .sf-grid-3 { grid-template-columns: 1fr; }
+  .st-table th:nth-child(5),
+  .st-table td:nth-child(5),
+  .st-table th:nth-child(6),
+  .st-table td:nth-child(6) { display: none; }
+}
