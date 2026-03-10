@@ -3,21 +3,22 @@ import { connectToDatabase } from "@/lib/db";
 import Result from "@/models/Result";
 import { verifyResultAccess } from "@/lib/jwt";
 
+interface Ctx { params: Promise<{ id: string }> }
+
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  { params }: Ctx) {
   try {
     const token = req.cookies.get("result_access")?.value;
     if (!token) {
       return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
     }
     const payload = verifyResultAccess(token);
-    if (!payload || payload.resultId !== params.id) {
+    if (!payload || payload.resultId !== (await params).id) {
       return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
     }
     await connectToDatabase();
-    const result = await Result.findById(params.id).lean() as any;
+    const result = await Result.findById((await params).id).lean() as any;
     if (!result) {
       return NextResponse.json({ ok: false, error: "Not found" }, { status: 404 });
     }
