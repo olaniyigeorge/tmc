@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/db";
 import Result from "@/models/Result";
+import School from "@/models/School";
 import { verifyResultAccess } from "@/lib/jwt";
 
 interface Ctx { params: Promise<{ id: string }> }
@@ -30,7 +31,6 @@ export async function GET(req: NextRequest, { params }: Ctx) {
       return NextResponse.json({ ok: false, error: "Not found" }, { status: 404 });
     }
 
-    const School = (await import("@/models/School")).default;
     const school = await School.findById(result.schoolId).lean() as any;
 
     return NextResponse.json({

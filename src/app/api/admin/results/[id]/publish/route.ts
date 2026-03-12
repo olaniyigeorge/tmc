@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/db";
 import Result from "@/models/Result";
+import School from "@/models/School";
 import { getSessionUser, ensureSchoolAccess } from "@/lib/auth";
 import { generatePin, hashPin, generateVerificationCode } from "@/lib/codes";
 
@@ -28,7 +29,7 @@ export async function POST(
     const pinHash = await hashPin(pin);
     // generate verification code
     // need school abbreviation and other info
-    const School = (await import("@/models/School")).default;
+
     const school = await School.findById(result.schoolId);
     const schoolAbbr = school?.abbreviation || school?.name?.split(" ")[0].toUpperCase();
     const code = await generateVerificationCode(

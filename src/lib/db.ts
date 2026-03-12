@@ -1,5 +1,12 @@
 import mongoose from "mongoose";
 
+
+import "@/models/School";
+import "@/models/User";
+import "@/models/Class";
+import "@/models/Student";
+import "@/models/Result";
+
 const cached: { conn: typeof mongoose | null; promise: Promise<typeof mongoose> | null } = {
   conn: null,
   promise: null,

@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/db";
 import Result from "@/models/Result";
-import Student from "@/models/Student";
+import StudentModel from "@/models/Student";
+import SchoolModel from "@/models/School";
+import ClassModel from "@/models/Class";
 import { getSessionUser, ensureSchoolAccess } from "@/lib/auth";
 import crypto from "crypto";
 
@@ -61,9 +63,6 @@ export async function GET(req: NextRequest) {
 
     const results = await Result.find(query).lean<ResultLean[]>();
 
-    const StudentModel = (await import("@/models/Student")).default;
-    const SchoolModel  = (await import("@/models/School")).default;
-
     const studentIds  = results.map((r) => r.studentId);
     const schoolIds   = results.map((r) => r.schoolId);
 
@@ -109,7 +108,7 @@ export async function POST(req: NextRequest) {
 
     await connectToDatabase();
 
-    const student = await Student.findById(studentId);
+    const student = await StudentModel.findById(studentId);
     if (!student) {
       return NextResponse.json({ ok: false, error: "Student not found" }, { status: 404 });
     }
@@ -127,11 +126,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true, data: exists });
     }
 
-    const SchoolModel = (await import("@/models/School")).default;
+
     const school = await SchoolModel.findById(student.schoolId);
     const templateKey = school?.type === "SECONDARY" ? "TINABEL_SECONDARY" : "TINUOLA_PRIMARY";
 
-    const ClassModel = (await import("@/models/Class")).default;
+
     const cls = await ClassModel.findById(student.classId);
 
     // Generate a unique draft verification code — will be replaced on publish
