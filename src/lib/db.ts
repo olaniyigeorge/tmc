@@ -15,7 +15,7 @@ export async function connectToDatabase() {
     if (!uri) {
       throw new Error("Please define the MONGODB_URI environment variable inside .env.local");
     }
-    console.log("\nConnecting to MongoDB...\n");
+    console.debug("\nConnecting to MongoDB...\n");
     cached.promise = mongoose
       .connect(uri, { dbName })
       .then((mongoose) => {

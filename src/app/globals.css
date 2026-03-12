@@ -300,29 +300,200 @@ footer p { font-size: 13px; color: rgba(255,255,255,0.35); }
 /* ============================================================
    ADMIN — SHELL (sidebar + main)
    ============================================================ */
-.admin-shell { display: flex; min-height: 100vh; }
 
-.admin-sidebar { width: var(--sidebar-w); flex-shrink: 0; background: var(--dark); display: flex; flex-direction: column; padding: 24px 14px; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
-.sidebar-logo { display: flex; align-items: center; gap: 10px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 20px; }
-.logo-emblem-sm { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(135deg, var(--pink) 0%, var(--blue) 100%); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+/* Layout */
+.admin-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── DESKTOP SIDEBAR ── */
+.admin-sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--dark);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 10px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Logo row */
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px 20px 14px; 
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 20px;
+}
+.logo-emblem-sm {
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, var(--pink) 0%, var(--blue) 100%);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
 .logo-emblem-sm svg { width: 18px; height: 18px; fill: white; }
-.sidebar-brand { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; color: white; line-height: 1.2; }
-.sidebar-subbrand { font-size: 10px; color: rgba(255,255,255,0.38); letter-spacing: 0.07em; text-transform: uppercase; }
-.sidebar-role-badge { display: flex; flex-direction: column; gap: 5px; margin-bottom: 20px; }
-.role-pill { display: inline-block; padding: 3px 10px; border-radius: 50px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; align-self: flex-start; }
+.sidebar-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px; font-weight: 700;
+  color: white; line-height: 1.2;
+}
+.sidebar-subbrand {
+  font-size: 10px; color: rgba(255,255,255,0.38);
+  letter-spacing: 0.07em; text-transform: uppercase;
+}
+
+/* Role badge */
+.sidebar-role-badge {
+  padding: 0 14px;
+  display: flex; flex-direction: column;
+  gap: 5px; margin-bottom: 20px;
+}
+.role-pill {
+  display: inline-block; padding: 3px 10px;
+  border-radius: 50px; font-size: 10px;
+  font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; align-self: flex-start;
+}
 .role-pill.super  { background: rgba(233,30,140,0.20); color: var(--pink-light); }
 .role-pill.school { background: rgba(26,86,219,0.20);  color: var(--blue-light); }
-.sidebar-username { font-size: 12px; color: rgba(255,255,255,0.45); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.sidebar-nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
-.sidebar-link { display: flex; align-items: center; gap: 10px; padding: 9px 11px; border-radius: 9px; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.52); text-decoration: none; transition: background 0.15s, color 0.15s; }
+.sidebar-username {
+  font-size: 12px; color: rgba(255,255,255,0.45);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Nav — stacks naturally, no flex:1 */
+.sidebar-nav {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+}
+
+/* Links are full-width, rounded with padding */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.52);
+  text-decoration: none;
+  width: 100%;
+  align-self: stretch;
+  box-sizing: border-box;
+  transition: background 0.15s, color 0.15s;
+}
+
 .sidebar-link:hover  { background: rgba(255,255,255,0.07); color: white; }
-.sidebar-link.active { background: rgba(233,30,140,0.18); color: var(--pink-light); }
-.sidebar-icon { font-size: 15px; flex-shrink: 0; }
-.sidebar-signout { display: flex; align-items: center; gap: 8px; padding: 9px 11px; border-radius: 9px; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.32); background: none; border: none; cursor: pointer; width: 100%; text-align: left; font-family: 'DM Sans', sans-serif; transition: background 0.15s, color 0.15s; margin-top: 8px; }
+.sidebar-link.active { background: rgba(233,30,140,0.18);  color: var(--pink-light); }
+.sidebar-icon { font-size: 15px; flex-shrink: 0;}
+
+/* Spacer — pushes sign-out to the very bottom */
+.sidebar-spacer { flex: 1; }
+
+/* Sign-out — full width, pinned at bottom */
+.sidebar-signout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 9px;
+  font-size: 13px; font-weight: 500;
+  color: rgba(255,255,255,0.32);
+  background: none; border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.15s, color 0.15s;
+}
 .sidebar-signout:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.65); }
 
-.admin-main { flex: 1; overflow-y: auto; background: var(--light); min-width: 0; }
+/* ── MAIN ── */
+.admin-main {
+  flex: 1; overflow-y: auto;
+  background: var(--light); min-width: 0;
+}
 .admin-page { padding: 32px 36px; max-width: 1100px; }
+
+/* ── MOBILE HEADER (hidden on desktop) ── */
+.mobile-header {
+  display: none;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  height: 56px;
+  background: var(--dark);
+  align-items: center;
+  padding: 0 16px;
+  gap: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.mobile-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; font-weight: 700; color: white;
+}
+
+/* Hamburger button */
+.hamburger {
+  display: flex; flex-direction: column;
+  justify-content: center; gap: 5px;
+  width: 36px; height: 36px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  display: block; height: 2px;
+  background: rgba(255,255,255,0.75);
+  border-radius: 2px;
+  transition: background 0.15s;
+}
+.hamburger:hover span { background: white; }
+
+/* ── MOBILE OVERLAY + DRAWER ── */
+.mobile-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(0,0,0,0.55);
+}
+.mobile-drawer {
+  position: absolute; top: 0; left: 0; bottom: 0;
+  width: 260px;
+  background: var(--dark);
+  display: flex; flex-direction: column;
+  padding: 24px 12px;
+  overflow-y: auto;
+  animation: slideIn 0.22s ease;
+}
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+.drawer-close {
+  align-self: flex-end;
+  background: none; border: none;
+  color: rgba(255,255,255,0.45);
+  font-size: 18px; cursor: pointer;
+  padding: 4px 8px; margin-bottom: 12px;
+}
+.drawer-close:hover { color: white; }
+
+/* ── RESPONSIVE BREAKPOINT ── */
+@media (max-width: 768px) {
+  .admin-sidebar   { display: none; }        /* hide desktop sidebar */
+  .mobile-header   { display: flex; }        /* show top bar */
+  .mobile-overlay  { display: block; }       /* overlay is block, shown via JS */
+  .admin-main      { padding-top: 56px; }    /* clear fixed header */
+  .admin-page      { padding: 20px 16px; }
+}
+
+
 
 /* ============================================================
    ADMIN — DASHBOARD

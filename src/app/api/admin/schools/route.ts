@@ -4,7 +4,7 @@ import School from "@/models/School";
 import { getSessionUser } from "@/lib/auth";
 
 export async function GET(req: NextRequest) {
-  console.log("Req info", req)
+  console.log("Req info", req.json())
   try {
     const user = await getSessionUser();
     await connectToDatabase();
