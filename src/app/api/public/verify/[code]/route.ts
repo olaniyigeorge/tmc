@@ -32,6 +32,11 @@ export async function GET(
     const parsed = verifySchema.parse({ code: (await params).code });
     await connectToDatabase();
     const result = await Result.findOne({ verificationCode: parsed.code }).lean() as any;
+
+    if (result.status !== "PUBLISHED") {
+    return NextResponse.json({ ok: true, data: { valid: false } });
+  }
+
     if (!result) {
       return NextResponse.json({ ok: true, data: { valid: false } });
     }
